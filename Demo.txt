@@ -1,0 +1,1406 @@
+#include<iostream>
+#include<stdio.h>
+#include<cmath>
+
+using namespace std;
+
+
+
+
+/* Demo class 
+
+*/
+
+
+class A
+{
+
+public:
+
+void fun();
+
+protected:
+
+int value;
+
+};
+
+class B : public A
+{
+
+public:
+
+void mode()
+{
+cout<<value<<endl;
+}
+
+};
+
+
+int main()
+{
+
+B objB;
+objB.mode();
+
+}
+
+
+
+/*// Observed the code care fully
+class A
+{
+public:
+
+	virtual void fun()
+	{
+		cout<<"Fun in class A"<<endl;
+	}
+	virtual ~A()
+	{
+		cout<<"in A class destructor"<<endl;
+	}
+
+};
+
+
+class B: public A
+{
+public:
+
+	void fun()
+	{
+		cout<<"In class B"<<endl ;
+	}
+	 ~B()
+	{
+		cout<<"in B class destructor"<<endl;
+	}
+
+};
+
+
+int main()
+{
+	A *obj = new B();
+	obj->fun();
+	delete obj;
+}*/
+
+
+
+/*// Observed the code care fully
+class A
+{
+public:
+
+A()
+{
+		cout<<"In Class A()"<<endl ;
+}
+
+A(int a)
+{
+	cout<<"In Class A()"<<endl ;
+}
+
+
+};
+
+
+class B
+{
+public:
+	A objA; // Error Searching default constructor in A class
+};
+
+
+int main()
+{
+	B objB;
+}*/
+
+
+
+
+
+/*class Base
+{
+   private:
+   int x;
+   public:
+   void show()
+   {
+      cout<<"Show"<<endl;
+   }
+   
+};
+
+int main()
+{
+   Base *ptr;
+   Base &ptr1;
+   Base obj;
+   ptr->show();
+   obj.show();
+   ptr1.show() // eRROR INITIALIZE THE PTR1
+   cout<<"Sizeof Base = "<<sizeof(ptr)<<endl;
+   cout<<"Sizeof Base = "<<sizeof(obj)<<endl;
+   cout<<"Sizeof int Pointer = "<<sizeof(int*)<<endl;
+}*/
+
+
+/*
+// Friend function and friend class in c++
+(1) Keyword "friend" is used to make some[function or class] as friend of your class.
+(2) Friend function or friend class can access private/public/protected data member or member of another class
+(3) Function can not become friend of another function
+(4) class can not become friend of function
+(5) Friendship is not a mutual. 
+    If a class A is friend of B, then B doesn't become friend of A automatically.
+(6) Friendship is not inherited
+
+*/
+
+/*
+// Example of friend function
+class Base
+{
+private:
+   int x;
+   
+public:
+   
+   Base() {}
+   Base(int a):x(a){}
+   friend void set(Base& obj, int a);
+   friend int get(Base& obj);
+   
+};
+
+void set(Base& obj, int a)
+{
+   obj.x = a;
+}
+
+
+int get(Base &obj)
+{
+   return obj.x;
+}
+
+int main()
+{
+   Base obj(100);
+   cout<<"Value "<< get(obj)<<endl;
+   set(obj, 299);
+   cout<<"Value "<< get(obj)<<endl;
+   
+   return 0;
+}
+
+*/
+
+
+/*
+
+class Base
+{
+ 
+private:
+   int x;
+public:
+   Base(){}
+   Base(int a):x(a){}
+   friend class GetSet;
+};
+
+class GetSet
+{
+public:
+   void set(Base& obj, int a)
+   {
+      obj.x= a;
+   }
+   
+   
+   int get(Base& obj)
+   {
+      return obj.x;
+   }
+};
+
+int main()
+{
+   Base obj(200);
+   GetSet getset;
+   cout<<"Frind class ="<< getset.get(obj)<<endl;
+   getset.set(obj, 300);
+   cout<<"Frind class ="<< getset.get(obj)<<endl;
+
+}
+*/
+
+
+
+/*class Cents
+{
+private:
+   int m_cents;
+
+public:
+ Cents()
+{
+
+}
+   Cents(int cents) { m_cents = cents; }
+
+   // add Cents + int using a friend function
+   friend Cents operator+(const Cents &c1, int value);
+
+   // add int + Cents using a friend function
+   friend Cents operator+(int value, const Cents &c1);
+
+
+   int getCents() const { return m_cents; }
+};
+
+// note: this function is not a member function!
+Cents operator+(const Cents &c1, int value)
+{
+   // use the Cents constructor and operator+(int, int)
+   // we can access m_cents directly because this is a friend function
+   return Cents(c1.m_cents + value);
+}
+
+// note: this function is not a member function!
+Cents operator+(int value, const Cents &c1)
+{
+   // use the Cents constructor and operator+(int, int)
+   // we can access m_cents directly because this is a friend function
+   return Cents(c1.m_cents + value);
+}
+
+int main()
+{
+   Cents c1(10), c2, c3;
+   Cents c1 = Cents(4) + 6;
+   Cents c2 = 6 + Cents(4);
+
+   c2 = c1 + 10;
+   c3 = 20 + c1;
+
+   std::cout << "I have " << c2.getCents() << " cents." << std::endl;
+   std::cout << "I have " << c3.getCents() << " cents." << std::endl;
+
+   return 0;
+}*/
+
+
+
+
+/*
+class A
+{
+public:
+ A()
+{
+      i = 0;
+      cout<<"A Constructor i = "<< i <<endl;
+}
+
+
+ int operator+( int intobj, myclass myobj)
+ {
+    return intobj + int(myobj);
+ }
+
+
+   A operator + ( int rhs )
+   {
+     return A( i + rhs );
+   }
+
+   friend A operator + (const A& left, const A& right)
+   {
+      return A(left.i + right.i);
+   }
+
+   A& operator + (const A& obj)
+   {
+      A a;
+      a.i = i + obj.i;
+      cout<<"Operator overloading"<<endl;
+      return *this;
+   }
+
+private:
+   int i;
+};
+
+int main()
+{
+   A obj1, obj2, obj3;
+
+  // obj2 = obj1 + 10;
+   obj3 = 20 + obj1;
+
+   return 0;
+}
+*/
+
+
+
+/*Use of explicit keyword
+#include<iostream>
+using namespace std;
+
+class Point
+{
+private:
+    int x, y;
+public:
+    explicit Point(int i = 0, int j = 0) {
+        x = i;   y = j;
+    }
+    void print() {
+        cout << endl << " x = " << x << ", y = " << y;
+    }
+};
+
+int main()
+{
+    Point t(20, 20);
+    t.print();
+    t = 30;   // Member x of t becomes 30
+    t.print();
+    return 0;
+}*/
+
+
+
+/*class Base
+{
+public:
+	virtual void fun() const
+	{
+		cout<<"In BAse class"<<endl;
+	}
+};
+
+class Derive:public Base
+{
+public:
+
+	void fun() const
+	{
+		cout<<"In Derive class"<<endl;
+	}
+};
+
+int main()
+{
+
+	Base *base;
+	Derive derive;
+	base = &derive;
+	base->fun();
+ cout<<"In main"<<endl;
+}*/
+
+/*Overload new and delete operator*/
+
+
+/*How to restric the dynamic allocation of the object
+
+class DynamicAllocation
+{
+private:
+
+	void* operator new (size_t size){};
+	void* operator new[] (size_t size){};
+	void operator delete(void*){};
+
+public:
+	int x;
+	DynamicAllocation(int i)
+	{
+		x = i;
+	}
+	void printValue()
+	{
+		cout<<"Value of A = "<<x<<endl;
+	}
+
+};
+
+
+int main()
+{
+	//DynamicAllocation dynamicAllocation = new DynamicAllocation();
+	//DynamicAllocation dynamicAllocation = new DynamicAllocation[10];
+	//Dynamic memory allocation not allowed
+
+	DynamicAllocation dynamicAllocation(100); // Compile time allocation is allowed
+	dynamicAllocation.printValue();
+
+}*/
+
+
+
+/*
+(***) Vector internal implematation
+
+
+template<typename T>
+class Vector
+{
+public:
+
+	typedef T *Iterator;
+	Vector();                                                // Default vector
+	Vector(unsigned int value);                             // Parameteried Vector
+	Vector(unsigned int value, const T& initial);
+	Vector(const Vector<T>& obj);                         // Copy constructor
+	Vector<T> & operator = (const Vector<T>& obj) ;      // Assigned ment operator
+   ~Vector();                                           // Destructor
+
+   unsigned int capacity() const;                     // Capacity of the vector
+   unsigned int size() const;                        // Calculate the total size of the vector
+   bool empty() const;                              // Check the vector is empty or not
+   Iterator begin();                               // Take the element from the begin of vector
+   Iterator end();                                // Take the element from the end of the vector
+   T &front();                                   // Take first element of the vector
+   T &back();                                   // Take last element of the vector
+   void push_back(const T& value);             // Insert the element in the vector
+   void pop_back();                           // Take the element from the vector
+
+
+   void reserve(unsigned int capacity);   // reserve the size of the vector
+   void resize(unsigned int size);       //  resize of the vector
+
+
+   T & operator[](unsigned int index); // Take the element from the vector at perticular index
+
+  void clear();
+
+private:
+
+   unsigned int _capacity;         // Hold the total capacity of the vector
+   unsigned int _size;            //  Hold the size of the vector
+   unsigned int Log;             //
+   T* buffer;                   //  Hold the buffer
+};
+
+// Default constructor
+template<typename T>
+Vector<T>::Vector()
+{
+
+	_capacity = 0;
+	_size     = 0;
+	buffer    = 0;
+	Log       = 0;
+}
+
+// Vector destructor
+template<typename T>
+Vector<T>::~Vector()
+{
+	delete[]buffer;
+}
+// Parametirized constructor
+
+template<typename T>
+Vector<T>::Vector(const Vector<T> &Obj)
+{
+	_capacity = Obj._capacity;
+	_size     = Obj._size;
+	Log       = Obj.Log;
+	buffer = new T[_size];
+
+	for (int index = 0 ; index < _size ; index++)
+	{
+		buffer[index] = Obj.buffer[index]; // Assiging the index value in the buffer
+	}
+}
+
+// Parametirized constructor
+
+template<typename T>
+Vector<T>::Vector(unsigned int index)
+{
+	_size = index;
+	Log = ceil(log((double)index) / log(2.0));
+	_capacity = 1 << Log;
+	buffer = new T[_capacity];
+}
+
+// Empty the Vector class size
+
+template<typename T>
+bool Vector<T>::empty() const
+{
+	return _size = 0;
+}
+
+// Initialized vector with some value
+
+template<typename T>
+Vector<T>::Vector(unsigned int index, const T& initialValue)
+{
+	_size = index;
+	Log = ceil(log((double)index) / log(2.0));
+	_capacity = 1 << Log;
+	buffer = new T[_capacity];
+	for (int value ; value < _size ; value++)
+	{
+		buffer[value] = initialValue;
+	}
+
+}
+
+// Assignement copy contstructor
+
+template<typename T> Vector<T>&
+Vector<T>::operator = (const Vector<T> &obj)
+{
+	delete[]buffer;
+	_size = obj._size;
+	Log = obj.Log;
+	_capacity = obj._capacity;
+	buffer = new T[_capacity];
+	 for (int value ; value < _size ; value++)
+	 {
+		 buffer[value] = obj.buffer[value];
+	 }
+
+	 return *this;
+}
+
+
+template<typename T> typename
+Vector<T>::Iterator Vector<T>::begin()
+{
+return buffer;
+}
+
+template<typename T> typename
+Vector<T>::Iterator Vector<T>::end()
+{
+	return buffer + size();
+}
+
+template<typename T> T&
+Vector<T>::front()
+{
+ return buffer[0];
+}
+
+template<typename T> T&
+Vector<T>::back()
+{
+	return buffer[_size - 1];
+}
+
+template<typename T> void
+Vector<T>::push_back(const T& index)
+{
+	if (_size >= buffer)
+	{
+		reserve(1 << Log);
+		Log++;
+	}
+	buffer[_size++] = index;
+}
+
+template<typename T>void
+Vector<T>::pop_back()
+{
+return _size--;
+}
+
+// Rserve the buffer of the vector
+template<typename T>void
+Vector<T>::reserve(unsigned int bufferCapacity)
+{
+	T *newBuffer = new T[bufferCapacity];
+
+	for (int i = 0 ; i < _size ; i++)
+	{
+		newBuffer[i] = buffer[i];
+	}
+	_capacity = bufferCapacity;
+	delete[]buffer;
+	buffer = newBuffer;
+}
+
+Calculate the size of the vector
+
+template<typename T> unsigned int
+Vector<T>::size() const
+{
+	return _size;
+}
+
+Calcute the resize the vector
+
+template<typename T> void
+Vector<T>::resize(unsigned int size)
+{
+	Log = ceil(log((double)size)/ log(2.0));
+	reserve(1 << Log);
+	_size = size;
+}
+
+Calcute the index Sbsscript operator
+
+template<typename T>T&
+Vector<T>::operator[](unsigned int index)
+{
+	return buffer[index];
+}
+
+Calcute the total capacity of the vector
+template<typename T> unsigned int
+Vector<T>::capacity()const
+{
+	return _capacity;
+}
+
+
+Clear the vector
+
+template<typename T> void
+Vector<T>::clear()
+{
+	_capacity = 0;
+	_size = 0;
+	buffer = 0 ;
+	Log = 0;
+}
+
+
+// Main functio of the vector
+int main()
+{
+
+	Vector<int> vObj;
+}
+
+*/
+
+
+
+/*//Check indiannes of the machine
+
+int main()
+{
+	unsigned int a = 1;
+
+	char *p = (char*)(&a);
+
+	if(*p)
+	{
+		cout<<"Little Indian"<<endl;
+	}
+	else
+	{
+		cout<<"Big Indian"<<endl;
+	}
+}*/
+
+
+
+/*
+
+union test {
+    unsigned int x : 3;
+    unsigned int y : 3;
+    int z;
+};
+
+int main()
+{
+    union test t;
+    t.x = 5;
+    t.y = 4;
+    t.z = 1;
+    printf("t.x = %d, t.y = %d, t.z = %d",
+           t.x, t.y, t.z);
+    return 0;
+}
+
+
+#include <stdio.h>
+struct test {
+    unsigned int x;
+    long int y : 33;
+    unsigned int z;
+};
+int main()
+{
+    struct test t;
+    unsigned int* ptr1 = &t.x;
+    unsigned int* ptr2 = &t.z;
+    printf("%d", ptr2 - ptr1);
+    return 0;
+}*/
+
+
+
+/*class test 
+{
+   char ch;
+//  / double d;
+   unsigned int x;
+  unsigned int y : 1;
+   unsigned int z;
+   char ch1;
+   int ddd;
+};
+int main()
+{
+    cout<<"Value = " << sizeof(test)<<endl;
+    return 0;
+}*/
+
+
+/*class A
+{
+ int a : 2;
+ int b : 1;
+ int c : 10;
+ int d : 1;
+ int e: 1;
+};
+
+class B
+{
+public:
+	B (A a) {
+
+		cout<<"Inside B class"<<endl;
+	}
+
+	B(int a)
+	{
+		cout<<"Inside B "<<endl;
+	}
+};
+
+int main()
+{
+	cout<<"Size of A Class= "<<sizeof(A)<<endl;
+	A a;
+	B b = a;
+	B b1 = 10;
+}*/
+
+
+
+
+/*
+static_cast --> simplet cast and compile time cast(
+it doses the think like implicit conversion)
+=> It performs imlicit conversion between types.
+*/
+
+
+// => (1) It performs imlicit conversion between types.
+
+
+
+/*int main()
+{
+   float f = 3.5;
+   int a;
+   a = f;
+   a = static_cast<int>(f); //--> happen at compile time
+}*/
+
+
+
+
+// => (2) Use static_cast when conversion between types is provided through
+// conversion operator or conversion constructor.
+
+
+
+/*class Int
+{
+   int a;
+
+public:
+   // Conversion constructor
+   Int(int i = 0): a(i)
+{
+      cout<<"Conversion constructor"<<endl;
+}
+
+operator string()
+      {
+      cout<<"Conversion operator = "<< a <<endl;
+      return to_string(a);
+     }
+};
+
+
+int main()
+{
+	Int obj(3);
+	string stringValue = obj; // Called conversion opeartor Compile type casting
+	obj = 100; // Called conversion constructor
+	string str2 = static_cast<string>(obj);
+	obj = static_cast<Int>(100);
+
+}*/
+
+
+
+
+// (3) static_cast is more restrictive than c-Style cast.
+
+ // Example: char * to int * allowed in C-Style but not with static_cast.
+
+
+
+/*int main()
+{
+	char c; // 1 Byte
+	
+	int *p = (int*)(&c); // 4 Byte memory location
+	
+	*p = 10; // Pass at compile time but failed at run time
+	        // (that's wht it is dangerous)
+	
+ int *p1 = static_cast<int*>(&c);// Failed at compile time, because bot compatible
+ 
+ // error: invalid static_cast from type ‘char*’ to type ‘int*’
+}*/
+
+
+
+
+//(4) static_cast avoid cast from derived to private base pointer
+
+
+/*class Base{};
+
+class Derived: private Base {};
+
+int main()
+{
+   Derived d1;
+
+   Base *b = (Base*)&d1; // Allowed at compile-time
+   
+   Base *bp = static_cast<Base*>(&d1); // Not allowed at compile time
+   
+   return 0;
+   
+   // error: ‘Base’ is an inaccessible base of ‘Derived’
+}*/
+
+
+
+//==>> (5) use for all upcaste but never use for confused down cast*/
+
+
+
+/*class Base 
+{
+public:
+	virtual void fun()
+	{
+		cout<<"In Base class"<<endl;
+	}
+};
+
+class Derived1: public Base 
+{
+public:
+	void fun()
+	{
+	cout<<"In Derived1 class"<<endl;
+	}
+};
+
+
+class Derived2 : public Base 
+{
+public:
+	void fun()
+	{
+	cout<<"In Derived2 class"<<endl;
+	}
+};
+
+int main()
+{
+   
+ Derived1 d1;
+ Derived2 d2;
+ Base ba;
+
+ Base *bp1 = static_cast<Base*>(&d1);
+ Base *bp2 = static_cast<Base*>(&d2);
+ 
+ //Derived1 *db = static_cast<Derived1*>(&ba); // Allowed but printing base class fun()
+ // db->fun();
+
+ bp1->fun();
+ bp2->fun();
+ 
+ cout<<"Sizeof class Base = "<<sizeof(Base)<<endl;
+ cout<<"Sizeof class Derived1 = "<<sizeof(Derived1)<<endl;
+ cout<<"Sizeof class Derived2 = "<<sizeof(Derived2)<<endl;
+
+
+}*/
+
+
+
+//==> (6) static_cast should be prefered when converting to void* OR from void
+
+/*
+
+int main()
+{
+	int value = 01;
+
+	void *v = static_cast<void*>(&value);
+	
+//	/cout<<"Value of v = "<< *v <<endl;
+	
+	int *ip = static_cast<int*>(v);
+	
+	cout<<"Value of ip = "<< *ip <<endl;
+}
+*/
+
+
+
+
+
+/*
+dynamic_cast --> dynamic_cast<new_type>(expression)
+
+=>  which safely convert from pointer(or reference) to a base type to a pointer(or reference) to derived type.
+=> Dynamic_cast is used at run time to find out correct down cast.
+=> Note:- Need at least one virtual function in base class.
+=> Note:- If cast is successful, dynamic cast return a value of type new type.
+=> Note:- If cast fails and new type is a pointer type, it return a null pointer of that type
+=> Note:- If the cast fails and new type is a reference type, it throws an exception
+           that matches a handler of type std:bad_cast.
+*/
+
+/*class Base
+{
+public:
+	virtual void print()
+	{
+		cout<< "Base "<<endl;
+	}
+};
+
+class Derived1 : public Base
+{
+public:
+	void print()
+	{
+		cout<<"Derived1 "<<endl;
+	}
+};
+class Derived2 : public Base
+{
+public:
+	void print()
+	{
+		cout<<"Derived2 "<<endl;
+	}
+};
+
+
+
+int main()
+{
+	Derived1 d1;
+
+	Base *bp = dynamic_cast<Base*>(&d1);
+	if(bp)
+		bp->print(); // o/p Derived1
+	
+	Derived2 *d2 = dynamic_cast<Derived2*>(bp);
+	if(d2)
+	{
+		d2->print();
+	}
+	else
+	{
+		cout<<"D2 is null"<<endl; // o/p D2 is null
+	}
+
+	Derived1 *d11 = dynamic_cast<Derived1*>(bp);
+	if(d11)
+	{
+		d11->print(); // o/p Derived1
+	}
+	else
+	{
+		cout<<"D2 is null"<<endl;
+	}
+}*/
+
+
+
+
+
+// reinterpret_cast --> Can be used to convert a pointer to an object to an unrelated object type.
+
+// (1) => It can perform dangerous conversion because it can typecast any pointer to any other pointer.*/
+
+
+/*class Mango
+{
+public:
+	void eatMango()
+	{
+		cout<<"In Mango class"<<endl;
+	}
+};
+
+
+class Banana
+{
+public:
+	void eatBanana() // Compile changes like this void eatBnana(const Bnana *this, int a, int b)
+	{
+		cout<<"In Banana class"<<endl;
+	}
+};
+
+
+int main()
+{
+	Banana *banana = new Banana();
+	Mango *mango = new Mango();
+	Banana *newBanana = reinterpret_cast<Banana*>(mango);
+	newBanana->eatBanana();  // o/p In Banana class
+
+}*/
+
+
+
+// ==> (2) It is used when you want to work with bits
+
+/*struct Demo
+{
+	int x;
+	int y;
+	char c;
+	bool b;
+};
+
+int main()
+{
+	Demo obj;
+	obj.x = 12;
+	obj.y = 30;
+	obj.c = 'm';
+	obj.b = true;
+
+	int *p = reinterpret_cast<int*>(&obj);
+	cout<< *p <<endl; // 12
+	++p;
+	cout<<*p <<endl; // 30
+	++p;
+	char *c = reinterpret_cast<char*>(p);
+	cout<<*c<<endl; // m
+	++c;
+	bool *b = reinterpret_cast<bool*>(c);
+	cout<<*b <<endl;
+}*/
+
+
+
+/*
+RTTI -> Run-time type indentification is to provide a standard way for a program to determine
+ the type of the object during runtime
+*/
+
+/*
+const_cast  --> add and remove the contness of the variable
+----------------------
+const_cast in c++
+---------------------
+=> The expression const_cast<T>(v) can be used to change the const or
+volatile qualifier of pointer and reference.
+=> Where T must be a pointer, reference or pointer to member types.
+
+=> When we need to call some 3rd party library where it is
+taking variable/ object as not const but not changes that
+*/
+/*void thirdParty(int *x)
+{
+	int k = 10;
+	cout<< k + *(x) <<endl;
+}
+
+int main()
+{
+
+
+const int a = 10;
+const int *p = &a;
+thirdParty(const_cast<int*>(p));
+
+return 0;
+
+}*/
+
+
+
+/*Example of static_cast
+
+class A
+{
+   
+};
+
+
+class B : public A
+{
+   
+   
+};
+
+
+class B : private A 
+{
+   
+   
+};
+
+int main()
+{
+   B b;
+   A *a = (A*)(&b); // Explicit cast 
+   A *a2 = static_cast<A*>(&b) ; // static_cast // Error 
+   
+   
+   cout<<"Hello c++" <<endl;
+}*/
+
+
+
+/*
+//Exapmle of Dynamic_cast
+
+
+class A
+{
+public:
+   virtual void fun()
+   {
+      cout<<"A::fun()"<<endl;
+   }
+};
+
+
+class B : public A
+{
+public:
+   void fun()
+   {
+      cout<<"B::fun()"<<endl;
+   }
+   
+};
+
+
+int main()
+{
+   A a;
+   
+   B b;
+   
+   //a.fun();
+   //b.fun();
+   
+   
+   A *pA = &a;
+   B *pB = &b;
+   // pA->fun() ;
+   //pB->fun();
+   
+   pA = &b;
+ //  pA->fun();
+  // pB = &a; // Error not possible t assign the object of class a in pointer of B class.
+   pB = dynamic_cast<B*>(&a); // Compile fine and get a waring (warning: dynamic_cast of ‘A a’ to ‘class B*’ can never succeed)
+  // pB->fun(); // We will get the Segmentation fault
+   
+   pB = dynamic_cast<B*>(&b);  
+   
+}*/
+
+/*
+
+// EXample of reinterpret_cast
+
+class A
+{
+public:
+   void fun()
+   {
+      cout<<"A::fun()"<<endl;
+   }
+};
+
+
+class B 
+{
+public:
+   void fun()
+   {
+      cout<<"B::fun()"<<endl;
+   }
+   
+};
+
+
+int main()
+{
+   A *a = new A();
+   
+   B *b = new B();
+   
+   B *b1 = reinterpret_cast<B*>(a);
+   b1->fun();
+   
+}
+
+*/
+
+
+/* Storage class in c++
+ * 
+ * auto 
+ * register
+ * static and 
+ * extern
+ * mutable
+ * 
+ * 
+ * */
+/*-----------------------------------*/
+
+
+
+/*class A
+{
+
+ virtual int fun(int a) {};
+ virtual int fun1(int a) {};
+};
+
+int main()
+
+{
+	cout<<"SizeOf "<<sizeof(A)<<endl;
+	//cout<<"SizeOf int "<<sizeof(int)<<endl;
+}*/
+
+
+/*
+class A
+{
+
+};
+
+class B
+{
+   int i;
+};
+
+class C
+{
+   void foo();
+};
+
+
+class D
+{
+   virtual void foo();
+};
+
+class E
+{
+   int i ;
+   virtual void foo();
+};
+
+
+
+class F
+{
+   int i;
+   void foo();
+};
+
+
+class G
+{
+   void foo();
+   int i;
+   void foo1();
+};
+
+class H
+{
+   int i ;
+   virtual void foo();
+   virtual void foo1();
+};
+
+
+class I
+{
+   virtual void foo() = 0;
+   virtual void foo1() = 0;
+   char ch;
+   int i;
+   int iq;
+};
+
+int main()
+{
+cout <<"sizeof(class A) : " << sizeof(A) << endl ;
+cout <<"sizeof(class B) adding the member int i : " << sizeof(B) << endl ;
+cout <<"sizeof(class C) adding the member void foo() : " << sizeof(C) << endl ;
+cout <<"sizeof(class D) after making foo virtual : " << sizeof(D) << endl ;
+cout <<"sizeof(class E) after adding foo virtual , int : " << sizeof(E) << endl ;
+cout <<"sizeof(class F) after adding foo  , int : " << sizeof(F) << endl ;
+cout <<"sizeof(class G) after adding foo  , int : " << sizeof(G) << endl ;
+cout <<"sizeof(class H) after adding int 2 virtual " << sizeof(H) << endl ;
+cout <<"sizeof(class I) after adding int 2 virtual " << sizeof(I) << endl ;
+return 0;
+}
+*/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

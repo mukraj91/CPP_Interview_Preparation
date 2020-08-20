@@ -1,0 +1,297 @@
+Google test/ gTest / gMock / Unit test:
+---------------------------------------
+Install Googletest
+--------------------
+https://github.com/google/googletest/
+ 
+--------------------------------------
+
+
+TEST( TestName, Suntest_1)
+{
+ASSERT_TRUE(1 == 1) -> SUCCESSFUL
+ASSERT_FALSE(1 == 2) -> Successful
+
+}
+-------------
+Assertions
+-> Success
+-> Non-Fatal --> continue if test fail
+-> Fatal Failure --> stop if the test pass
+
+---------------
+EXPECT_EQ() -->  In case of success Assertions
+ASSERT_EQ() -->  In case of success Assertions 
+------------------
+EXPECT_EQ() -->  Non-Fatal(Even test failed, it execut further)
+ASSERT_EQ()  --> Fatal Assertions(Even test failed, it stop executing, next line never execute)
+
+------------------------------------
+Write a unit test case.
+
+-> Writing unit test cases required three things.
+(1) Arrange  -> Arrange everything required to run the test.
+(2) Act      -> Run the Test
+(3) Assert   -> Verify the Output
+
+
+TEST(TestName, SubtestName)
+{
+// Arrange
+int value = 100;
+int increment = 5;
+
+// Act
+
+value = value + increment;
+
+// Assert
+
+ASSERT_EQ(value , 105) -> test successful
+}
+
+------------------------------
+Example -2
+
+-------------------------------
+
+class Myclass
+{
+
+string id;
+public:
+Myclass(string _id):id(_id){}
+
+string getId() {return id;}
+
+};
+
+TEST(TestName, Mytest)
+{
+// Arrange 
+Myclass mc("root");
+
+
+//Act
+string str = mc.getId();
+
+// Assert 
+
+ASSERT_EQ(value, "root"); --> fail boz string comparion
+ASSERT_EQ(value.c_str(), "root"); --> fail boz string comparion
+ASSERT_STREQ(value.c_str(), "root"); -> successful
+EXPECT_STREQ(value.c_str(), "root");  -> successful
+
+}
+-------------------------------------------------------------------------------------------------
+Test Fixture(s) -> Test fixture are the place , where you can write a common code.
+
+Test Fixture class  has a method call setup() and tear_down() which will get called automatically.
+
+class Myclass{
+int baseValue;
+
+public:
+Myclass(int value) : baseValue(value){}
+void increment(int intValue)
+{
+baseValue = baseValue + intValue;
+}
+int getValue()
+{
+return baseValue;
+}
+};
+-------------------------------------------
+Write testFixture class for common logic of test_class
+-------------------------------------------
+
+
+struct MyclassTest : public testing::Test{
+
+Myclass *mc;
+
+void SetUp(){mc = new Myclass(100);}
+void TearDown() {delete mc ;}
+
+};
+
+// called test fixture class 
+// TEST_F(test_fixture|_class)_name, test_subtype)
+
+TEST_F(MyclassTest, increment_by_5)
+{
+mc->increment(5);
+
+ASSERT_EQ(mc->getValue(), 105);
+}
+
+TEST_F(MyclassTest, increment_by_10)
+{
+mc->increment(5);
+
+ASSERT_EQ(mc->getValue(), 110);
+}
+==============================================================
+Note: SetUp and TearDown is called for every test fixture case.
+===============================================================
+Google c++ Mocking Framwork
+Mocks -> Mocks are used for testing the behaviour of API(s)
+Interface which will be used in component under test.
+
+Writting a mock test required below things.
+---
+#include<gmock/gmock.h>
+using ::testing::AtLeast;
+using ::testing::Return;
+using ::testing::_;
+
+class DataBaseConnect
+{
+public:
+
+virtual bool login(string username, string password)
+{return true;}
+virtual bool logout(string username)
+{return true;}
+virtual int fetchRecord()
+{return -1 ;}
+};
+
+// Writing a mock class  for DataBaseConnect interface.
+
+class MockDB : public DataBaseConnect
+{
+public:
+// MOCK_METHOD0(function_name, return type(Number of parameter)) --> MOCK_METHOD0 means not take parameter.
+MOCK_METHOD0(fetchRecord, int());
+MOCK_METHOD1(logout, bool(string username));
+MOCK_METHOD2(login, bool(string username, string password));
+}
+
+class MyDatabase
+{
+DataBaseConnect& dbc;
+public:
+MyDatabase(DataBaseConnect& _dbc):dbc(_dbc){}
+
+int Init(string username, string password){
+if(dbc.login(username, password)!= true)
+{
+if(dbc.login(username, password!= true))
+{
+cout<<"DB FAILURE 2nd times"<<endl;
+return -1;
+}
+}else{
+cout<<" DB Success"<<endl; return 1;
+}
+}
+};
+--------------------------------------------
+// Writing a mock test 
+
+TEST(MyDBTest, LoginTest)
+{
+// Arrange
+MockDB mdb;
+MyDatabase db(mdb);
+
+// EXPECT_CALL() -> Set the behaviour of particular interface function , which you are going to call in part of this test.
+// EXPECT_CALL(mdb, login(_, _)) -> (_, _)takes any kinds of input. 
+
+EXPECT_CALL(mdb, login(Terminator", "I am back)).
+Times(AtLeast(1)).
+WillOnce(Return(true)); --> Set the behaviour of login() method
+
+// Act
+ int retValue = db.Init("Terminator", "I am back");
+ 
+// Assert 
+
+// ASSERT_TRUE(retValue, 1);
+EXPECT_EQ(retValue, 1);
+}
+-------------------------------------------------------
+// Test for login failure
+
+TEST(MyDBTest, LoginFailure)
+{
+// Arrange
+MockDB mdb;
+MyDatabase db(mdb);
+
+EXPECT_CALL(mdb, login(_,_)).
+Times(2).
+WillRepeatedly(Return(false)); 
+
+// Act
+ int retValue = db.Init("Terminator", "I am back");
+ 
+// Assert 
+
+// ASSERT_TRUE(retValue, 1);
+EXPECT_EQ(retValue, 1);
+}
+-----------------------------------------
+Let's check what is difference between EXPECT_CALL() and ON_CALL()
+
+TEST(MyDBTest, LoginTest)
+{
+
+MockDB mdb;
+MyDatabase db(mdb);
+
+// ON_CALL() -> Need not to be expect call login() function.
+// EXPECT_CALL() -> Should be called login() function
+
+ON_CALL(mdb, login(_,_)).WillByDefault(Return(true));
+int retValue = db.Init("Terminator", "I will back");
+
+------
+Also you  can writelike this for ON_CALL()
+
+ON_CALL(mdb, login(_,_)).WillByDefault(return(true));
+
+int retValue = 1;
+
+EXPECT_EQ(retValue, 1);
+
+}
+
+----------------
+
+
+
+
+------------------------------------------
+
+
+
+int main(int argc, char **argv)
+{
+testing::InitGoogleTest(&argc, argv);
+return RUN_ALL_TESTS();
+}
+
+===================================================
+
+Integration test
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
