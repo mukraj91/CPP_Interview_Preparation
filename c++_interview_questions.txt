@@ -1,0 +1,116 @@
+1. What is difference between in C and C++?
+C supports procedural programming paradigm for code development.
+C++ supports both procedural and object oriented programming paradigms; therefore C++ is also called a hybrid language.
+C does not support object oriented programming; therefore it has no support for polymorphism, encapsulation, and inheritance.
+Being an object oriented programming language C++ supports polymorphism, encapsulation, and inheritance.
+In C (because it is a procedural programming language), data and functions are separate and free entities.
+In C++ (when it is used as object oriented programming language), data and functions are encapsulated together in form of an object. For creating objects class provides a blueprint of structure of the object.
+In C, data are free entities and can be manipulated by outside code. This is because C does not support information hiding.
+In C++, Encapsulation hides the data to ensure that data structures and operators are used as intended.
+C, being a procedural programming, it is a function driven language.
+While, C++, being an object oriented programming, it is an object driven language.
+C does not support function and operator overloading.
+C++ supports both function and operator overloading.
+C does not allow functions to be defined inside structures.
+In C++, functions can be used inside a structure.
+C does not have namespace feature.
+C++ uses NAMESPACE which avoid name collisions.
+A namespace is a declarative region that provides a scope to the identifiers (the names of types, functions, variables, etc) inside it. Namespaces are used to organize code into logical groups and to prevent name collisions that can occur especially when your code base includes multiple libraries. All identifiers at namespace scope are visible to one another without qualification. Identifiers outside the namespace can access the members by using the fully qualified name for each identifier.
+C uses functions for input/output. For example scanf and printf.
+C++ uses objects for input output. For example cin and cout.
+C does not support reference variables.
+C++ supports reference variables.
+C has no support for virtual and friend functions.
+C++ supports virtual and friend functions.
+C provides malloc() and calloc() functions for dynamic memory allocation, and free() for memory de-allocation.
+C++ provides new operator for memory allocation and delete operator for memory de-allocation.
+C does not provide direct support for error handling (also called exception handling)
+C++ provides support for exception handling. Exceptions are used for "hard" errors that make the code incorrect.
+
+2. Why is the size of an empty class not zero in C++?
+To give a identification on memory space for the instance created for the class a minimum memory is allocated to the instance.
+3. What are C++ access, specifiers ?
+http://www.trytoprogram.com/cplusplus-programming/access-specifiers/#:~:targetText=C%2B%2B%20Access%20Specifiers%20%E2%80%93%20Private%2C%20Public%20and%20Protected&targetText=C%2B%2B%20access%20specifiers%20are%20used,sections%2C%20private%20protected%20and%20public%20.
+
+4. What are the various OOPs concepts in C++?
+
+5. What are the differences between a C++ struct and C++ class?
+6. What is difference between new and malloc?
+7. What is a namespace?
+8. What is Overriding?
+9. How to create .dll in C++ and how to link .dll in your code?
+10. What is overloading?
+11. How to create and use a reference variable in c++?
+12. Can you overload a function based only on whether a parameter is a value or a reference?
+13. What is difference between function overloading and Operator Overloading?
+14. Can we access private data members of a class without using a member or a friend function?
+15. What is the use of inline function?
+16. how to access derived class function from base class object without using virtual function?
+17. Distinguish between shallow copy and deep copy.
+18. Friend class and function in C++
+19. what is difference between constructor and destructor?
+20. How are .h files loaded and linked with their .c files?
+21. What Is Inheritance?
+22. What is “this” pointer?
+23. What is difference between delete and free?
+24. What is encapsulation?
+25. What is static Member in c++?
+26. What is a pure virtual function in c++?
+27. Count the number of words, characters, and lines in a file?
+28. Any fundamental difference between source and header files in C?
+29. Can a C++ class member function template be virtual?
+30. What is the Diamond problem? How can we get around it?
+31. What are the advantages of inheritance?
+32. why virtual functions cannot be static in c++?
+33. How does the compilation/linking process work?
+34. Can you explain the order of execution in constructor initialization list?
+35. How to make a C++ class whose objects can only be dynamically allocated?
+36. Is it possible to have Virtual Constructor? If yes, how? If not, Why not possible?
+37. What is a constructor? Is default constructor exist in C++?
+38. Can a constructor throw an exception? How to handle the error when the constructor fails?
+39. What is the difference between a copy constructor and an overloaded assignment operator?
+40. When are copy constructors called in C++?
+41. Why copy constructor takes the parameter as a reference in C++?
+42. What do you mean by inline function?
+43. What is a template function?
+44. Can we combine c and C++ code?
+45. What is shared pointer in c++?
+46. What is typecasting?
+47. Why is a pure virtual function initialized by 0?
+48. How to create multidimensional arrays using new?
+49. When should static_cast, dynamic_cast, const_cast and reinterpret_cast be used?
+50. Can I free() pointers allocated with new?
+51. How do I convert an integer to a string in C++?
+52. What is the difference between a pointer and a reference?
+53. When should I use references, and when should I use pointers?
+54. What is the assignment operator in c++?
+55. What does the explicit keyword mean?
+56. When do we need to create virtual destructor in our class?
+57. What is Polymorphism?
+58. What is the effect of extern “C” in C++?
+59. What are the different types of polymorphism in C++?
+60. Can a copy constructor accept an object of the same class as a parameter, in place of reference
+of the object? If No, why not possible?
+61. What about Virtual Destructor?
+62. What is conversion constructor?
+63. How do you access the static member of a class?
+64. When do we use the Initializer List in C++?
+65. Is it possible to overload the destructor the class?
+66. Which is faster: Stack allocation or Heap allocation
+67. What is auto pointer in C++?
+68. What is the smart pointer in C++?
+69. Can I delete pointers allocated with malloc()?
+70. Can I use realloc() on pointers allocated via new?
+71. Can I call the destructor explicitly?
+72. Can one constructor of a class call another constructor of the same class to initialize the this
+object?
+73. What is the difference between an array and a list?
+74. What is a “pure virtual” member function and when it is used?
+75. What are VTABLE and VPTR?
+76. How to handle the exception in C++?
+77. What is a Memory Leak?
+78. why static functions cannot access non-static variables?
+79. What is a dangling pointer?
+80. What is “mutable” keyword in C++?
+81. What are the debugging methods you use when came across a problem?
+82. STL Containers – What are the types of STL containers?
