@@ -5,11 +5,7 @@
 using namespace std;
 
 
-
-
-/* Demo class 
-
-*/
+/* Demo class */
 
 
 class A
