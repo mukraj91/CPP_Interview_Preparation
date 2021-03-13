@@ -117,7 +117,8 @@ object?
 =========================================================================================
 *****************************************************************************************
 =========================================================================================
-We recommend you use the STAR(R) model when answering questions. This will help you create clarity and structure your response. 
+We recommend you use the STAR(R) model when answering questions.
+This will help you create clarity and structure your response. 
  
 Situation
 Task
@@ -282,44 +283,19 @@ https://www.codeproject.com/Articles/15351/Implementing-a-simple-smart-pointer-i
 
 https://www.geeksforgeeks.org/how-to-implement-user-defined-shared-pointers-in-c/#:~:text=It%20is%20a%20reference%20counting,of%20the%20object%20is%20called.
 
+Difference between C structures and C++ structures?
+https://www.geeksforgeeks.org/difference-c-structures-c-structures/
 
 
+Structure Member Alignment, Padding and Data Packing
+https://www.geeksforgeeks.org/structure-member-alignment-padding-and-data-packing/
 
 
+How to avoid Structure Padding in C?
 
-Analyzing Core Dumps Using GDB ?
-
-https://betterexplained.com/articles/debugging-with-gdb/
-
-Is the core file created in the User space or Kernel Space ?
-
-Kernel Space VS User space  ?
+https://www.geeksforgeeks.org/how-to-avoid-structure-padding-in-c/
 
 
-
-Run time config :
-
-ulimit 
-ulimit -Sc --> Soft Limit
-ulimit -Hc ---> Hard limit
-
-/etc/security/limit.conf --> Change the limit. 
-
-
-http://sourceware.org/gdb/current/onlinedocs/gdb/
-
-
-https://man7.org/linux/man-pages/man7/signal.7.html
-
-Race condition example ??
-
-mutex_lock() -> learn 
-info threads -> 
-thread apply all bt --> All thread will see
-
-Print natural number in two thread ?
-
-Is ther any priority set for signals? If multiple crash occurs, do we have multiple core dump files?
 
 
 
@@ -937,3 +913,59 @@ const int*&p_ref2 = ptr2
 ===============================================================================================
 ***********************************************************************************************
 ===============================================================================================
+
+Analyzing Core Dumps Using GDB ?
+
+https://betterexplained.com/articles/debugging-with-gdb/
+
+Is the core file created in the User space or Kernel Space ?
+
+Kernel Space VS User space  ?
+
+
+
+Run time config :
+
+ulimit 
+ulimit -Sc --> Soft Limit
+ulimit -Hc ---> Hard limit
+
+/etc/security/limit.conf --> Change the limit. 
+
+
+http://sourceware.org/gdb/current/onlinedocs/gdb/
+
+
+https://man7.org/linux/man-pages/man7/signal.7.html
+
+Race condition example ??
+
+mutex_lock() -> learn 
+info threads -> 
+thread apply all bt --> All thread will see
+
+Print natural number in two thread ?
+
+Is ther any priority set for signals? If multiple crash occurs, do we have multiple core dump files?
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
